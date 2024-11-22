@@ -1,0 +1,77 @@
+package org.zerock.controller;
+
+import java.io.File;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.extern.log4j.Log4j;
+
+@Controller
+@Log4j
+public class UploadController {
+
+	@GetMapping("/uploadForm")
+	public void uploadForm() {
+		log.info("upload from");
+	}
+	
+	@PostMapping("/uploadFormAction")
+	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
+		
+		String uploadFolder = "c:\\upload";
+		
+		for(MultipartFile multipartFile: uploadFile) {
+			log.info("------------------");
+			log.info("Upload File Name : " + multipartFile.getOriginalFilename());
+			log.info("Upload File Size : " + multipartFile.getSize());
+			
+			//파일 경로 객체 설정
+			File savefile = new File(uploadFolder, multipartFile.getOriginalFilename());
+			
+			try {
+				multipartFile.transferTo(savefile);		//파일저장
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@GetMapping("/uploadAjax")
+	public void uploadAjax() {
+		
+	}
+	
+	@PostMapping("/uploadAjaxAction")
+	public void uploadAjaxPost(MultipartFile[] uploadFile, Model model) {
+		
+		String uploadFolder = "c:\\upload";
+		
+		for(MultipartFile multipartFile: uploadFile) {
+			log.info("------------------");
+			log.info("Upload File Name : " + multipartFile.getOriginalFilename());
+			log.info("Upload File Size : " + multipartFile.getSize());
+			
+			String uploadFileName = multipartFile.getOriginalFilename();
+			
+			uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
+			
+			log.info("only file name : "+uploadFileName);
+			
+			//파일 경로 객체 설정
+			File savefile = new File(uploadFolder, multipartFile.getOriginalFilename());
+			
+			try {
+				multipartFile.transferTo(savefile);		//파일저장
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
+}

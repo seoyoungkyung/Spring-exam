@@ -1,0 +1,7 @@
+package org.zerock.mapper;
+
+public interface SampleMapper {
+
+	@insert("insert into tbl_sample1(col1) values(#{data}")
+	public int insertCol1(String data);
+}

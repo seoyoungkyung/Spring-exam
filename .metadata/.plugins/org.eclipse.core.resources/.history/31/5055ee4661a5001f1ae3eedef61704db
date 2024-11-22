@@ -1,0 +1,27 @@
+package org.zerock.service;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import lombok.extern.log4j.Log4j;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@Log4j
+public class SampleTxServiceTests {
+
+	@Autowired
+	private SampleTxService txService;
+	
+	@Test
+	public void testLong() {
+		String str = "통계청은 18일 이런 내용을 담은 '행정자료를 활용한 2023년 주택소유 통계' 결과를 발표했다. 이번 통계는 건축물대장, 주택공시 가격, 재산세 자료 등 주택 관련 행정자료와 인구주택총조사 자료를 활용해 작성됐다.";
+		
+		log.info("길이 : "+str.getBytes().length);
+		
+		txService.addData(str);
+	}
+}

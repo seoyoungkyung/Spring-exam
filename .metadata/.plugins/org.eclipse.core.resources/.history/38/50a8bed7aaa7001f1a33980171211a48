@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.mapper.MemberMapper">
+	
+	<select id = "read" resultMap="memberMap">
+		 select
+		 	m.userid,userid,username,enabled,
+		 	regdate,updatedate,auth
+		 from tbl_member m left outer join tbl_member_auth a
+		 on m.userid = a.userid
+		 where m.userid = #{userid}
+	</select>
+</mapper>

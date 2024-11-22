@@ -1,0 +1,6 @@
+package org.zerock.service;
+
+public interface SampleService2 {
+
+	public Integer doAdd(String str1, String str2) throws Exception;
+}
